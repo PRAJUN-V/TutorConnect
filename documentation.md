@@ -6,13 +6,22 @@ Backend  : Django, DjangoRestFramework
 Set up Git and GitHub for this project.
     - Initial commit at this stage.
         git commit -m "initial commit"
+
 git commit -m "initial set up of project named server in backend completed"
+
 git commit -m "added tailwind css in frontend"
+
 git commit -m "User model is changed to use email instead of username"
+
 removed pycache folder from git tracking: git rm --cached -r __pycache__
 __pycache__/ : added in .gitignore file
+
 git commit -m "registration, get_token, refresh token is working properly in backend."
+
 git commit -m "profile model is created and a profile related to user is automatically created"
+
+git commit -m "simple login registratin and homepage is completed but when I change is_active after login it is not going to login it refresh the homepage itself I should find a solution for that"
+
 
 
 ___________________________________________________________________________________________________
@@ -130,6 +139,12 @@ Backend
 - Created a file named signals.py create profile automatically when user is created with same id as user.
         Now a profile is created related with user whenever a new user is created.
 
+- Created custom token obtain pair view to include profile role and user is_active in token.
+
+- Modified User Serializer in accounts so that role in profile can be also included in it during registration.
+
+- (Error) : registration api is not returning role but it functioning correctly
+
 - 
 
 
@@ -144,6 +159,26 @@ Frontend
 
 - Connected tailwind CSS with frontend
         Documentation: https://tailwindcss.com/docs/guides/vite
+
+- npm install axios jwt-decode react-router-dom
+
+- Created folder named pages and components inside src folder
+
+- Created constants.js and api.js
+
+- Created an enviroment variable file .evn
+
+- Created a file named ProtectedRoute.jsx in components folder.
+
+- Created Home.jsx file in user included it in protect route for now.
+
+- npm install react-router-dom formik yup @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons axios jwt-decode
+        for login page
+
+- 
+
+
+
 
 ___________________________________________________________________________________________________
 

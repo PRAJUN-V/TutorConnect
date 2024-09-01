@@ -1,14 +1,41 @@
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import ProtectedRoute from "./components/ProtectedRoute"
+import { Home } from "./pages/user/Home"
+import { Login } from "./pages/authentication/Login"
+import { Register } from "./pages/authentication/Register"
 
+function Logout() {
+  localStorage.clear()
+  return <Navigate to="/login" />
+}
+
+function RegisterAndLogout() {
+  localStorage.clear()
+  return <Register />
+}
 
 function App() {
 
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">
-        Tutor Connect
-      </h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/register" element={<RegisterAndLogout />} />
+
+        {/* Any authorized users can access this route */}
+        <Route path="/" element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        } />
+
+
+
+      </Routes>
+    </BrowserRouter>
   )
 }
 
