@@ -3,8 +3,8 @@ POST http://127.0.0.1:8000/api/account/register/
 Content-Type: application/json
 
 {
-    "email": "theja@gmail.com",
-    "password": "Theja@123"
+    "email": "user2@gmail.com",
+    "password": "User@123"
 }
 
 ###

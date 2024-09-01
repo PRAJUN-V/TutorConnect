@@ -11,6 +11,8 @@ git commit -m "added tailwind css in frontend"
 git commit -m "User model is changed to use email instead of username"
 removed pycache folder from git tracking: git rm --cached -r __pycache__
 __pycache__/ : added in .gitignore file
+git commit -m "registration, get_token, refresh token is working properly in backend."
+git commit -m "profile model is created and a profile related to user is automatically created"
 
 
 ___________________________________________________________________________________________________
@@ -123,6 +125,12 @@ Backend
 
 - registration, get_token, refresh token is working properly in backend.
 
+- Model named profile is created in accounts with field user and role(for now)
+
+- Created a file named signals.py create profile automatically when user is created with same id as user.
+        Now a profile is created related with user whenever a new user is created.
+
+- 
 
 
 ___________________________________________________________________________________________________
@@ -136,4 +144,12 @@ Frontend
 
 - Connected tailwind CSS with frontend
         Documentation: https://tailwindcss.com/docs/guides/vite
+
+___________________________________________________________________________________________________
+
+Models
+
+accounts
+    - profile
+
 
