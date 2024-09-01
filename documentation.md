@@ -8,6 +8,7 @@ Set up Git and GitHub for this project.
         git commit -m "initial commit"
         git commit -m "initial set up of project named server in backend completed"
         git commit -m "added tailwind css in frontend"
+        git commit -m "User model is changed to use email instead of username"
 
 ___________________________________________________________________________________________________
     
@@ -51,6 +52,18 @@ Backend
 - python manage.py migrate
 
 - Added db.sqlite3 in .gitignore
+
+- Using Email instead of username in User model
+        Tutorial followed : https://www.youtube.com/watch?v=Um-rWZKhL3E
+        First delete current  db.sqlite database
+        pip install django-use-email-as-username
+        python manage.py create_custom_user_app
+        python manage.py createsuperuser
+                - email: admin@gmail.com
+                - password : Admin@123
+
+
+
 
 ___________________________________________________________________________________________________
 

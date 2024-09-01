@@ -40,7 +40,13 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+    
+    # For custom User model with email rather than username
+    'django_use_email_as_username.apps.DjangoUseEmailAsUsernameConfig',
+    'custom_user.apps.CustomUserConfig',
 ]
+
+AUTH_USER_MODEL = 'custom_user.User'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
