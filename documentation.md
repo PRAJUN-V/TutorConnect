@@ -7,6 +7,9 @@ Set up Git and GitHub for this project.
     - Initial commit at this stage.
         git commit -m "initial commit"
         git commit -m "initial set up of project named server in backend completed"
+        git commit -m "added tailwind css in frontend"
+
+___________________________________________________________________________________________________
     
 
 Backend
@@ -49,7 +52,7 @@ Backend
 
 - Added db.sqlite3 in .gitignore
 
-
+___________________________________________________________________________________________________
 
 Frontend
 
@@ -58,5 +61,6 @@ Frontend
 - npm create vite@latest
         Created React project
 
-
+- Connected tailwind CSS with frontend
+        Documentation: https://tailwindcss.com/docs/guides/vite
 
