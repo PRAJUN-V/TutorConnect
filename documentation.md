@@ -24,6 +24,8 @@ git commit -m "simple login registratin and homepage is completed but when I cha
 
 git commit -m "basic authentication including login and registration is completed will update later if needed according to functionality"
 
+git commit -m "ProtectedRoute function is not working based on role find the problem and solved"
+
 ___________________________________________________________________________________________________
     
 

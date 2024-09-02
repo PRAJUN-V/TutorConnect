@@ -15,8 +15,8 @@ POST http://127.0.0.1:8000/api/account/token/
 Content-Type: application/json
 
 {
-    "email": "user1@gmail.com",
-    "password": "User@123"
+    "email": "student1@gmail.com",
+    "password": "Student@123"
 }
 
 ###
@@ -32,10 +32,5 @@ Content-Type: application/json
 ####
 
 GET http://127.0.0.1:8000/api/account/user-status/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI1MjUyNDI5LCJpYXQiOjE3MjUyNTIxMjksImp0aSI6IjAwYzM5ZDI2Mjg0NzRjZmY5OGZlYTliZjk2NGE4MDhjIiwidXNlcl9pZCI6MSwiaWQiOjEsInJvbGUiOiJhZG1pbiIsImlzX2FjdGl2ZSI6dHJ1ZX0.N86ROBmOyGxAX_35uu7kP8bmPyIX9pvXHxSp4mfkA5I
 Content-Type: application/json
-
-# {
-#     "password": "Student@123", 
-#     "email": "student6@yopmail.com", 
-#     "profile": {"role": "student"}
-# }

@@ -41,8 +41,9 @@ function ProtectedRoute({ children, requiredRole }) {
             });
             if (res.status === 200) {
                 setIsActive(res.data.is_active);
-                setUserRole(res.data.role);
-                if (res.data.is_active && (!requiredRole || requiredRole === res.data.role)) {
+                setUserRole(res.data.profile.role);
+                
+                if (res.data.is_active && (!requiredRole || requiredRole === res.data.profile.role)) {
                     setIsAuthorized(true);
                 } else {
                     setIsAuthorized(false);
