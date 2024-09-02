@@ -41,32 +41,22 @@ export const Login = () => {
             console.log(id);
             console.log(decoded.is_active);
 
-            if (userRole === "instructor") {
-                const profileRes = await api.get(`http://127.0.0.1:8000/instructor/profiles/${id}`);
-                const profile = profileRes.data;
 
-                if (!profile.application_submitted) {
-                    navigate("/instructor/become_instructor");
-                } else if (profile.application_submitted && !profile.admin_reviewed) {
-                    navigate("/instructor/awaiting-approval");
-                } else if (profile.admin_approved) {
-                    navigate("/instructor/dashboard"); // Create this page
-                } else if (profile.admin_rejected) {
-                    navigate("/instructor/become_instructor");
-                }
-            } else {
-                switch (userRole) {
-                    case "admin":
-                        navigate("/admin/dashboard");
-                        break;
-                    case "student":
-                        navigate("/");
-                        break;
-                    default:
-                        navigate("/login");
-                        break;
-                }
+            switch (userRole) {
+                case "admin":
+                    navigate("/admin/dashboard");
+                    break;
+                case "instructor":
+                    navigate("instructor/dashboard")
+                    break;
+                case "student":
+                    navigate("/");
+                    break;
+                default:
+                    navigate("/login");
+                    break;
             }
+
         } catch (error) {
             setErrors({ submit: error.message });
         } finally {

@@ -28,3 +28,14 @@ Content-Type: application/json
 {
     "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNTI1ODIzNywiaWF0IjoxNzI1MTcxODM3LCJqdGkiOiI5MzU0MzIxYzg1NTg0Y2M3OTUzNDIyZTU0ZGEzZThlOSIsInVzZXJfaWQiOjR9.DZ8HbdwxQ8ucM-0YRI_EDh6IzyuEFQ_XYPMDJNEIq7w"
 }
+
+####
+
+GET http://127.0.0.1:8000/api/account/user-status/
+Content-Type: application/json
+
+# {
+#     "password": "Student@123", 
+#     "email": "student6@yopmail.com", 
+#     "profile": {"role": "student"}
+# }

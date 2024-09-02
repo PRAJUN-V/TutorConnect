@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import api from "./../api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
 
@@ -21,11 +21,32 @@ function ProtectedRoute({ children, requiredRole }) {
             });
             if (res.status === 200) {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
-                const decoded = jwtDecode(res.data.access);
-                setUserRole(decoded.role);
-                // console.log(decoded.is_active);
-                setIsActive(decoded.is_active); // Adjust if the field is different
                 setIsAuthorized(true);
+                await checkUserStatus(res.data.access); // Check user status after refreshing the token
+            } else {
+                setIsAuthorized(false);
+            }
+        } catch (error) {
+            console.log(error);
+            setIsAuthorized(false);
+        }
+    };
+
+    const checkUserStatus = async (token) => {
+        try {
+            const res = await api.get("/api/account/user-status/", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (res.status === 200) {
+                setIsActive(res.data.is_active);
+                setUserRole(res.data.role);
+                if (res.data.is_active && (!requiredRole || requiredRole === res.data.role)) {
+                    setIsAuthorized(true);
+                } else {
+                    setIsAuthorized(false);
+                }
             } else {
                 setIsAuthorized(false);
             }
@@ -47,9 +68,7 @@ function ProtectedRoute({ children, requiredRole }) {
         if (tokenExpiration < now) {
             await refreshToken();
         } else {
-            setUserRole(decoded.role);
-            setIsActive(decoded.is_active); // Adjust if the field is different
-            setIsAuthorized(true);
+            await checkUserStatus(token); // Check user status if the token is valid
         }
     };
 
@@ -57,7 +76,7 @@ function ProtectedRoute({ children, requiredRole }) {
         return <div>Loading...</div>;
     }
 
-    if (isAuthorized && isActive && (!requiredRole || requiredRole === userRole)) {
+    if (isAuthorized && isActive) {
         return children;
     } else {
         return <Navigate to="/login" />;

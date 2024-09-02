@@ -22,7 +22,7 @@ git commit -m "profile model is created and a profile related to user is automat
 
 git commit -m "simple login registratin and homepage is completed but when I change is_active after login it is not going to login it refresh the homepage itself I should find a solution for that"
 
-
+git commit -m "basic authentication including login and registration is completed will update later if needed according to functionality"
 
 ___________________________________________________________________________________________________
     
@@ -144,8 +144,12 @@ Backend
 - Modified User Serializer in accounts so that role in profile can be also included in it during registration.
 
 - (Error) : registration api is not returning role but it functioning correctly
+        But it is not a problem I I used List it is showing role in that view so no problem.
 
-- 
+- Created UserStatusSerializer in accounts.serializer to check user is active or not in frontend.
+        Created view and url for this.
+
+- Now the protected route in frontend is checking each time from backend whether is user is active or not.
 
 
 ___________________________________________________________________________________________________
@@ -175,10 +179,13 @@ Frontend
 - npm install react-router-dom formik yup @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons axios jwt-decode
         for login page
 
-- 
+- Created Login.jsx and Register.jsx file.
 
+- Changed some settings in ProtectedRoute.jsx so that each time it will check backend for the user role and active status
 
+- If it is logged in as instructor it will redirect to instructor/dashboard/ route. I changed the logic from last project to this.
 
+-
 
 ___________________________________________________________________________________________________
 

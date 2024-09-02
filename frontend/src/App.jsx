@@ -20,19 +20,16 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
+        {/* General route : Any authorized users can access this route */}
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
 
-        {/* Any authorized users can access this route */}
         <Route path="/" element={
           <ProtectedRoute>
             <Home />
           </ProtectedRoute>
         } />
-
-
 
       </Routes>
     </BrowserRouter>

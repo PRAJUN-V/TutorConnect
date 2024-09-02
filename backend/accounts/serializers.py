@@ -41,3 +41,10 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['is_active'] = user.is_active
 
         return token
+    
+class UserStatusSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(required=True)
+
+    class Meta:
+        model = User
+        fields = ["is_active", "profile"]
