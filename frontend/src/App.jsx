@@ -3,6 +3,8 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import { Home } from "./pages/user/Home"
 import { Login } from "./pages/authentication/Login"
 import { Register } from "./pages/authentication/Register"
+import { AdminDashboard } from "./pages/admin/AdminDashboard"
+import { InstructorDashboard } from "./pages/instructor/InstructorDashboard"
 
 function Logout() {
   localStorage.clear()
@@ -36,19 +38,19 @@ function App() {
 
         {/* Admin Routes */}
 
-        {/* <Route path="/" element={
+        <Route path="/admin/dashboard" element={
           <ProtectedRoute requiredRole="admin">
-            <Home />
+            <AdminDashboard />
           </ProtectedRoute>
-        } /> */}
+        } />
 
         {/* Instructor Routes */}
 
-        {/* <Route path="/admin/dashboard" element={
+        <Route path="/instructor/dashboard" element={
           <ProtectedRoute requiredRole="instructor">
-            <AdminDashboard />
+            <InstructorDashboard />
           </ProtectedRoute>
-        } /> */}
+        } />
 
         {/* Student Routes */}
         {/* <Route path="/admin/dashboard" element={

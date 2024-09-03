@@ -28,6 +28,8 @@ git commit -m "ProtectedRoute function is not working based on role find the pro
 
 git commit -m "a simple loading component is created and implemented in login session"
 
+git commit -m "I have created a beautiful loading component using ldrs"
+
 ___________________________________________________________________________________________________
     
 
@@ -190,6 +192,20 @@ Frontend
 - If it is logged in as instructor it will redirect to instructor/dashboard/ route. I changed the logic from last project to this.
 
 - Rather than showind loading in button I created a Loading component which is save in components folder and implemented it in login page.
+
+- Created a folder named admin to add pages related to admin in it.
+
+- Created a file named simple AdminDashboard.jsx for landing page of admin when login.
+
+- Similarly as above created a file named InstructorDashboard.jsx for landing page of instructor.
+
+- Slightly updated the protected route so that token will delete automatically and go to login page when user is not active.
+
+- npm install ldrs
+        for getting loading components from this library
+
+- I have created a beautiful loading component using ldrs
+
 
 ___________________________________________________________________________________________________
 

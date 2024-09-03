@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import api from "./../api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
+import Loading from "./Loading";
 
 function ProtectedRoute({ children, requiredRole }) {
     const [isAuthorized, setIsAuthorized] = useState(null);
@@ -10,8 +11,14 @@ function ProtectedRoute({ children, requiredRole }) {
     const [isActive, setIsActive] = useState(null);
 
     useEffect(() => {
-        auth().catch(() => setIsAuthorized(false));
+        auth().catch(() => handleUnauthorized());
     }, []);
+
+    const handleUnauthorized = () => {
+        localStorage.removeItem(ACCESS_TOKEN);
+        localStorage.removeItem(REFRESH_TOKEN);
+        setIsAuthorized(false);
+    };
 
     const refreshToken = async () => {
         const refreshToken = localStorage.getItem(REFRESH_TOKEN);
@@ -21,14 +28,13 @@ function ProtectedRoute({ children, requiredRole }) {
             });
             if (res.status === 200) {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
-                setIsAuthorized(true);
                 await checkUserStatus(res.data.access); // Check user status after refreshing the token
             } else {
-                setIsAuthorized(false);
+                handleUnauthorized();
             }
         } catch (error) {
             console.log(error);
-            setIsAuthorized(false);
+            handleUnauthorized();
         }
     };
 
@@ -42,25 +48,25 @@ function ProtectedRoute({ children, requiredRole }) {
             if (res.status === 200) {
                 setIsActive(res.data.is_active);
                 setUserRole(res.data.profile.role);
-                
+
                 if (res.data.is_active && (!requiredRole || requiredRole === res.data.profile.role)) {
                     setIsAuthorized(true);
                 } else {
-                    setIsAuthorized(false);
+                    handleUnauthorized(); // User is not active, handle as unauthorized
                 }
             } else {
-                setIsAuthorized(false);
+                handleUnauthorized();
             }
         } catch (error) {
             console.log(error);
-            setIsAuthorized(false);
+            handleUnauthorized();
         }
     };
 
     const auth = async () => {
         const token = localStorage.getItem(ACCESS_TOKEN);
         if (!token) {
-            setIsAuthorized(false);
+            handleUnauthorized();
             return;
         }
         const decoded = jwtDecode(token);
@@ -74,7 +80,7 @@ function ProtectedRoute({ children, requiredRole }) {
     };
 
     if (isAuthorized === null) {
-        return <div>Loading...</div>;
+        return <Loading />
     }
 
     if (isAuthorized && isActive) {
