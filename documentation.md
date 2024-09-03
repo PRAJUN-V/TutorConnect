@@ -206,6 +206,19 @@ Frontend
 
 - I have created a beautiful loading component using ldrs
 
+- I am going to create header for my homepage
+        - inside components in user folder.
+        - I have created css design to design the header component in assets folder.
+
+For giving a beautiful design to header
+- npm install @nextui-org/navbar
+- npm install @nextui-org/react 
+Not getting header has expected so I changing the design.
+
+- I used header from edusphere project and make it responsive.
+        - but there is issue then the screen become small options are not seeing I will fix it later
+
+
 
 ___________________________________________________________________________________________________
 
