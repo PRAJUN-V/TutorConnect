@@ -30,6 +30,8 @@ git commit -m "a simple loading component is created and implemented in login se
 
 git commit -m "I have created a beautiful loading component using ldrs"
 
+git commit -m "Header is added in homepage"
+
 ___________________________________________________________________________________________________
     
 
