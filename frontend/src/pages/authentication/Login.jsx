@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -7,6 +7,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import api from "../../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
 import { jwtDecode } from "jwt-decode";
+import Loading from "../../components/Loading";
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -37,17 +38,13 @@ export const Login = () => {
 
             const decoded = jwtDecode(access);
             const userRole = decoded.role;
-            const id = decoded.user_id;
-            console.log(id);
-            console.log(decoded.is_active);
-
 
             switch (userRole) {
                 case "admin":
                     navigate("/admin/dashboard");
                     break;
                 case "instructor":
-                    navigate("instructor/dashboard")
+                    navigate("/instructor/dashboard");
                     break;
                 case "student":
                     navigate("/");
@@ -56,84 +53,101 @@ export const Login = () => {
                     navigate("/login");
                     break;
             }
-
         } catch (error) {
-            setErrors({ submit: error.message });
+            setErrors({ submit: "Incorrect email or password." });
         } finally {
             setSubmitting(false);
         }
     };
 
     return (
-        <div className="flex items-center justify-center h-screen bg-gray-100">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-md p-8 bg-white rounded shadow-md">
-                <h1 className="text-2xl font-bold text-blue-500 mb-4">Login</h1>
+                <h1 className="text-2xl font-bold text-blue-500 mb-6 text-center">Login</h1>
                 <Formik
                     initialValues={{ email: "", password: "" }}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
                     {({ isSubmitting, errors }) => (
-                        <Form>
-                            <div className="mb-4">
-                                <Field
-                                    type="email"
-                                    name="email"
-                                    placeholder="Email"
-                                    className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-                                />
-                                <ErrorMessage
-                                    name="email"
-                                    component="div"
-                                    className="text-red-500 text-sm"
-                                />
-                            </div>
-                            <div className="mb-4 relative">
-                                <div className="relative">
+                        <>
+                            {isSubmitting && <Loading />}
+                            <Form>
+                                <div className="mb-4">
+                                    <label htmlFor="email" className="block text-gray-700 mb-2">
+                                        Email
+                                    </label>
                                     <Field
-                                        type={showPassword ? "text" : "password"}
-                                        name="password"
-                                        placeholder="Password"
-                                        autoComplete="new-password"
-                                        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 pr-10"
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        placeholder="Enter your email"
+                                        className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                                     />
-                                    <span
-                                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                    >
-                                        <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
-                                    </span>
+                                    <ErrorMessage
+                                        name="email"
+                                        component="div"
+                                        className="text-red-500 text-sm mt-1"
+                                    />
                                 </div>
-                                <ErrorMessage
-                                    name="password"
-                                    component="div"
-                                    className="text-red-500 text-sm mt-1"
-                                />
+
+                                <div className="mb-6">
+                                    <label htmlFor="password" className="block text-gray-700 mb-2">
+                                        Password
+                                    </label>
+                                    <div className="relative">
+                                        <Field
+                                            type={showPassword ? "text" : "password"}
+                                            name="password"
+                                            id="password"
+                                            placeholder="Enter your password"
+                                            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                                        />
+                                        <button
+                                            type="button"
+                                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 focus:outline-none"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                        >
+                                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                                        </button>
+                                    </div>
+                                    <ErrorMessage
+                                        name="password"
+                                        component="div"
+                                        className="text-red-500 text-sm mt-1"
+                                    />
+                                </div>
+
+                                {errors.submit && (
+                                    <div className="text-red-500 text-sm mb-4 text-center">
+                                        {errors.submit}
+                                    </div>
+                                )}
+
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="w-full py-3 text-white bg-blue-500 rounded hover:bg-blue-600 transition duration-300 disabled:opacity-50"
+                                >
+                                    Login
+                                </button>
+                            </Form>
+
+                            <div className="mt-6 text-center">
+                                <Link to="/forgot-password" className="text-blue-500 hover:underline">
+                                    Forgot Password?
+                                </Link>
                             </div>
-                            {errors.submit && (
-                                <div className="text-red-500 text-sm mb-4">Incorrect email or password.</div>
-                            )}
-                            <button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className="w-full p-2 mb-4 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
-                            >
-                                {isSubmitting ? "Logging in..." : "Login"}
-                            </button>
-                        </Form>
+
+                            <div className="mt-4 text-center">
+                                <span className="text-gray-700">Don't have an account? </span>
+                                <Link to="/register" className="text-blue-500 hover:underline">
+                                    Register
+                                </Link>
+                            </div>
+                        </>
                     )}
                 </Formik>
-                <div className="flex justify-between text-center mt-4">
-                    <div>
-                        <Link to="/" className="text-blue-500 hover:underline">
-                            Home
-                        </Link>
-                        {" | "}
-                        <Link to="/register" className="text-blue-500 hover:underline">
-                            Register
-                        </Link>
-                    </div>
-                </div>
             </div>
         </div>
     );

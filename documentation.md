@@ -26,6 +26,8 @@ git commit -m "basic authentication including login and registration is complete
 
 git commit -m "ProtectedRoute function is not working based on role find the problem and solved"
 
+git commit -m "a simple loading component is created and implemented in login session"
+
 ___________________________________________________________________________________________________
     
 
@@ -187,7 +189,7 @@ Frontend
 
 - If it is logged in as instructor it will redirect to instructor/dashboard/ route. I changed the logic from last project to this.
 
--
+- Rather than showind loading in button I created a Loading component which is save in components folder and implemented it in login page.
 
 ___________________________________________________________________________________________________
 
