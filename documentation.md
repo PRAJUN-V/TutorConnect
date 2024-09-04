@@ -32,6 +32,8 @@ git commit -m "I have created a beautiful loading component using ldrs"
 
 git commit -m "Header is added in homepage"
 
+git commit -m "SubHeader is added in homepage"
+
 ___________________________________________________________________________________________________
     
 
@@ -159,6 +161,14 @@ Backend
 
 - Now the protected route in frontend is checking each time from backend whether is user is active or not.
 
+- Set up media in backent to save images for now I will use s3 bucket at the time of deloyment
+        MEDIA_URL = '/media/'
+        MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+        pip install pillow
+
+
+
+
 
 ___________________________________________________________________________________________________
 
@@ -219,6 +229,10 @@ Not getting header has expected so I changing the design.
 
 - I used header from edusphere project and make it responsive.
         - but there is issue then the screen become small options are not seeing I will fix it later
+
+- Implementing subheader in student homepage
+        - npm install react-icons
+        - SubHeader is functioning as I expected
 
 
 

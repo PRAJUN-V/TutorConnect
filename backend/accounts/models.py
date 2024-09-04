@@ -13,6 +13,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
 
     def __str__(self):
         return f'Profile of {self.user.email}'
